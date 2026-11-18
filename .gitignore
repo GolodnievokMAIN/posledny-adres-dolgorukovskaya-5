@@ -1,0 +1,8 @@
+.claude/
+*.zip
+# фото, которые не используются на странице
+photos/1000018973.jpg
+photos/1000018974.jpg
+photos/1000018975.jpg
+photos/1000018976.jpg
+photos/1000018977.jpg

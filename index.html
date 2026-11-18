@@ -1,0 +1,856 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0B0B0B">
+  <meta name="description" content="Цифровая мини-выставка о табличках проекта «Последний адрес» на доме по адресу: Москва, ул. Долгоруковская, 5.">
+  <title>Последний адрес. Долгоруковская, 5</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&family=PT+Serif:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --paper: #0B0B0B;
+      --ink: #F2EFEA;
+      --muted: #A9A39C;
+      --steel-dark: #8E9296;
+      --steel-light: #B9BDC0;
+      --plaque-ink: #161616;
+      --accent: #FF4A3D;
+      --blood: #8C0F12;
+      --trace: #3B3533;
+      --serif: "PT Serif", Georgia, serif;
+      --sans: "PT Sans", Arial, sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: var(--serif);
+      font-size: 18px;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+    img { display: block; width: 100%; height: auto; }
+    a { color: var(--accent); text-underline-offset: 0.2em; }
+    a:hover { text-decoration-thickness: 2px; }
+    button, a { -webkit-tap-highlight-color: transparent; }
+    button { font: inherit; }
+    :focus-visible {
+      outline: 3px solid var(--accent);
+      outline-offset: 4px;
+    }
+    ::selection { background: var(--blood); color: #fff; }
+
+    .skip-link {
+      position: fixed;
+      z-index: 20;
+      top: 12px;
+      left: 12px;
+      padding: 10px 16px;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: var(--sans);
+      transform: translateY(-160%);
+    }
+    .skip-link:focus { transform: translateY(0); }
+
+    .hero {
+      position: relative;
+      isolation: isolate;
+      min-height: 100svh;
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      overflow: hidden;
+      background: #1a0a0a;
+      color: #fff;
+    }
+    .hero-photo {
+      position: absolute;
+      z-index: -2;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: 53% center;
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      z-index: -1;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(11, 11, 11, .6) 0%, rgba(11, 11, 11, .15) 28%, rgba(90, 6, 8, .45) 58%, rgba(11, 11, 11, .95) 100%);
+    }
+    .hero-top {
+      width: min(100% - 64px, 1320px);
+      margin: 0 auto;
+      padding-top: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      font-family: var(--sans);
+      font-size: 14px;
+      line-height: 1.4;
+    }
+    .hero-top p { margin: 0; max-width: 440px; }
+    .hero-top a {
+      color: #fff;
+      text-decoration: none;
+      border-bottom: 1px solid rgba(255,255,255,.65);
+      padding: 6px 0;
+      white-space: nowrap;
+    }
+    .hero-content {
+      width: min(100% - 64px, 1320px);
+      margin: 0 auto;
+      align-self: end;
+      padding: 80px 0 54px;
+    }
+    h1, h2, h3, p { margin-top: 0; }
+    h1 {
+      max-width: 950px;
+      margin-bottom: 22px;
+      font-size: clamp(44px, 6.4vw, 88px);
+      line-height: 1.03;
+      font-weight: 400;
+      letter-spacing: -.035em;
+      text-wrap: balance;
+    }
+    .hero-subtitle {
+      max-width: 680px;
+      margin-bottom: 28px;
+      font-size: clamp(21px, 2.1vw, 29px);
+      line-height: 1.3;
+      text-wrap: balance;
+    }
+    .hero-intro {
+      max-width: 680px;
+      margin-bottom: 0;
+      font-size: 17px;
+      line-height: 1.6;
+    }
+    .hero-caption {
+      width: min(100% - 64px, 1320px);
+      margin: 0 auto;
+      padding: 16px 0 22px;
+      border-top: 1px solid rgba(255,255,255,.32);
+      font-family: var(--sans);
+      font-size: 12px;
+      line-height: 1.5;
+      color: #fff;
+    }
+
+    .section {
+      width: min(100% - 64px, 1180px);
+      margin: 0 auto;
+      padding: 108px 0;
+    }
+    .section + .section { border-top: 1px solid var(--trace); }
+    .section-heading {
+      display: grid;
+      grid-template-columns: minmax(220px, .75fr) minmax(0, 1.25fr);
+      column-gap: 64px;
+      margin-bottom: 48px;
+    }
+    h2 {
+      margin-bottom: 0;
+      font-size: clamp(34px, 4vw, 52px);
+      line-height: 1.12;
+      font-weight: 400;
+      letter-spacing: -.025em;
+      text-wrap: balance;
+    }
+    .section-intro { max-width: 670px; margin-bottom: 0; }
+    .prose { max-width: 700px; }
+    .prose p:last-child { margin-bottom: 0; }
+    .facts {
+      max-width: 820px;
+      margin: 0 0 52px auto;
+      padding: 0;
+      list-style: none;
+    }
+    .facts li {
+      position: relative;
+      padding: 18px 0 18px 30px;
+      border-top: 1px solid var(--trace);
+    }
+    .facts li:last-child { border-bottom: 1px solid var(--trace); }
+    .facts li::before {
+      content: "";
+      position: absolute;
+      left: 3px;
+      top: 32px;
+      width: 7px;
+      height: 7px;
+      background: var(--accent);
+    }
+
+    figure { margin: 0; }
+    figcaption {
+      padding-top: 12px;
+      color: var(--muted);
+      font-family: var(--sans);
+      font-size: 13px;
+      line-height: 1.5;
+    }
+    figcaption span, .hero-caption span { display: block; }
+    .photo-pair {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+    }
+    .photo-pair img, .photo-wide img, .closeups img, .split-photo img {
+      background: #1c1a19;
+    }
+    .photo-wide { margin-top: 48px; }
+
+    .project-layout, .copies-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(320px, .8fr);
+      align-items: start;
+      gap: 64px;
+    }
+    .project-layout .section-heading, .copies-layout .section-heading {
+      display: block;
+      margin-bottom: 30px;
+    }
+    .project-layout h2, .copies-layout h2 { margin-bottom: 28px; }
+
+    .wall-section { width: min(100% - 64px, 1260px); }
+    .wall-section .section-heading { max-width: 1120px; }
+    .wall-group { margin-top: 52px; }
+    .wall-group h3 {
+      margin-bottom: 22px;
+      font-family: var(--sans);
+      font-size: 18px;
+      line-height: 1.4;
+      font-weight: 400;
+      color: var(--muted);
+    }
+    .name-wall {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      align-items: start;
+      gap: 22px;
+    }
+    .person-card { min-width: 0; }
+    .card-summary {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 19 / 11;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0;
+      padding: 20px 24px;
+      border: 0;
+      border-radius: 1px;
+      cursor: pointer;
+      text-align: center;
+      color: var(--ink);
+      transition: box-shadow .2s ease;
+    }
+    .card-summary:hover { box-shadow: 0 0 0 1px var(--accent); }
+    .present .card-summary {
+      background: linear-gradient(125deg, var(--steel-dark), var(--steel-light) 53%, #a7acb0);
+      box-shadow: inset 0 0 0 1px rgba(0,0,0,.25), inset 0 1px 0 rgba(255,255,255,.35);
+      color: var(--plaque-ink);
+    }
+    .plaque-layout {
+      width: 100%;
+      display: grid;
+      grid-template-columns: 23% 1fr;
+      align-items: center;
+      gap: 18px;
+    }
+    .plaque-hole {
+      display: block;
+      width: 100%;
+      aspect-ratio: 1;
+      background: #2a2624;
+      box-shadow: inset 0 0 0 1px rgba(0,0,0,.35);
+    }
+    .plaque-text {
+      display: block;
+      font-family: var(--sans);
+      font-size: clamp(10px, 1.05vw, 14px);
+      font-weight: 700;
+      line-height: 1.32;
+      text-transform: uppercase;
+    }
+    .plaque-text span { display: block; }
+    .plaque-name { margin: 3px 0; }
+    .removed .card-summary {
+      flex-direction: column;
+      gap: 8px;
+      background: transparent;
+      color: var(--muted);
+      box-shadow: inset 0 0 0 2px var(--trace), inset 0 0 0 6px var(--paper), inset 0 0 0 7px var(--trace);
+    }
+    .removed-name {
+      max-width: 85%;
+      font-size: 20px;
+      line-height: 1.25;
+    }
+    .removed-note {
+      font-family: var(--sans);
+      font-size: 13px;
+      line-height: 1.3;
+    }
+    .card-toggle {
+      position: absolute;
+      right: 12px;
+      bottom: 9px;
+      font-family: var(--sans);
+      font-size: 11px;
+      line-height: 1;
+      font-weight: 400;
+      text-transform: none;
+    }
+    .card-toggle::after { content: " +"; }
+    .person-card.open .card-toggle::after { content: " −"; }
+    .person-card.open .card-summary { box-shadow: inset 0 0 0 3px var(--accent); }
+    .card-detail {
+      display: grid;
+      grid-template-rows: 0fr;
+      visibility: hidden;
+      transition: grid-template-rows .28s ease, visibility .28s;
+    }
+    .person-card.open .card-detail { grid-template-rows: 1fr; visibility: visible; }
+    .card-detail-inner { overflow: hidden; }
+    .card-detail p {
+      margin: 0;
+      padding: 18px 4px 4px;
+      font-family: var(--sans);
+      font-size: 15px;
+      line-height: 1.55;
+      color: var(--ink);
+    }
+    .wall-note {
+      max-width: 760px;
+      margin: 34px 0 0;
+      color: var(--muted);
+      font-family: var(--sans);
+      font-size: 14px;
+      line-height: 1.55;
+    }
+
+    .unmarked .wall-lead {
+      max-width: 760px;
+      margin: -6px 0 28px;
+      color: var(--muted);
+      font-family: var(--sans);
+      font-size: 15px;
+      line-height: 1.55;
+    }
+    .unmarked-wrap { position: relative; }
+    .unmarked-list {
+      margin: 0;
+      padding: 26px 0 0;
+      list-style: none;
+      border-top: 1px solid var(--accent);
+      columns: 3 250px;
+      column-gap: 44px;
+    }
+    .unmarked-list li { break-inside: avoid; padding-bottom: 16px; }
+    .u-name { display: block; font-size: 17px; line-height: 1.3; }
+    .u-meta {
+      display: block;
+      margin-top: 2px;
+      color: var(--muted);
+      font-family: var(--sans);
+      font-size: 13px;
+      line-height: 1.4;
+    }
+    .unmarked-wrap.is-collapsed {
+      max-height: 430px;
+      overflow: hidden;
+      -webkit-mask-image: linear-gradient(#000 65%, transparent);
+      mask-image: linear-gradient(#000 65%, transparent);
+    }
+    .unmarked-more {
+      margin-top: 18px;
+      padding: 11px 20px;
+      border: 1px solid var(--accent);
+      border-radius: 0;
+      background: transparent;
+      color: var(--ink);
+      font-family: var(--sans);
+      font-size: 15px;
+      cursor: pointer;
+    }
+    .unmarked-more:hover { background: var(--blood); }
+    .closeups {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px 28px;
+      margin-top: 56px;
+    }
+
+    .quote-section {
+      padding-top: 88px;
+      padding-bottom: 88px;
+      background: var(--blood);
+      box-shadow: 0 0 0 100vmax var(--blood);
+      clip-path: inset(0 -100vmax);
+    }
+    .section + .quote-section, .quote-section + .section { border-top: 0; }
+    .quote-section blockquote { border-left-color: #fff; }
+    .quote-section blockquote footer, .quote-section .ref { color: #F3D9D6; }
+    blockquote {
+      max-width: 870px;
+      margin: 0 auto;
+      padding-left: 42px;
+      border-left: 3px solid var(--accent);
+    }
+    blockquote p {
+      margin-bottom: 24px;
+      font-size: clamp(28px, 4vw, 46px);
+      line-height: 1.3;
+      letter-spacing: -.02em;
+    }
+    blockquote footer {
+      color: var(--muted);
+      font-family: var(--sans);
+      font-size: 15px;
+      line-height: 1.55;
+    }
+
+    .numbers {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      margin-bottom: 48px;
+    }
+    .number {
+      padding: 32px 0;
+      border-top: 1px solid var(--accent);
+      border-bottom: 1px solid var(--trace);
+    }
+    .number strong {
+      display: block;
+      font-size: clamp(76px, 10vw, 128px);
+      line-height: .95;
+      font-weight: 400;
+      color: var(--accent);
+    }
+    .number span {
+      display: block;
+      margin-top: 18px;
+      font-size: clamp(20px, 2.4vw, 29px);
+      line-height: 1.25;
+    }
+    .numbers-prose { max-width: 760px; }
+    .martirolog-link {
+      display: inline-block;
+      margin-top: 12px;
+      font-family: var(--sans);
+      font-size: 16px;
+    }
+
+    .sources-section { padding-top: 56px; padding-bottom: 48px; }
+    .about-line {
+      max-width: 820px;
+      margin: 0 0 10px;
+      color: var(--muted);
+      font-family: var(--sans);
+      font-size: 15px;
+      line-height: 1.55;
+    }
+    .page-footer {
+      width: min(100% - 64px, 1180px);
+      margin: 0 auto;
+      padding: 24px 0 34px;
+      border-top: 1px solid var(--trace);
+      color: var(--muted);
+      font-family: var(--sans);
+      font-size: 13px;
+    }
+
+    @media (max-width: 1050px) {
+      .name-wall { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .plaque-text { font-size: clamp(11px, 1.65vw, 15px); }
+      .project-layout, .copies-layout { gap: 40px; }
+    }
+    @media (max-width: 760px) {
+      body { font-size: 17px; }
+      .hero-top, .hero-content, .hero-caption, .section, .page-footer { width: min(100% - 40px, 1180px); }
+      .hero-top { padding-top: 20px; align-items: flex-start; }
+      .hero-top p { max-width: 210px; }
+      .hero-content { padding: 64px 0 38px; }
+      .hero-intro { font-size: 16px; }
+      .hero-photo { object-position: 57% center; }
+      .section { padding: 72px 0; }
+      .section-heading { display: block; margin-bottom: 34px; }
+      .section-heading h2 { margin-bottom: 24px; }
+      .facts { margin-bottom: 38px; }
+      .photo-pair { grid-template-columns: 1fr; gap: 32px; }
+      .project-layout, .copies-layout { grid-template-columns: 1fr; gap: 36px; }
+      .project-layout .split-photo { order: 2; }
+      .name-wall { gap: 16px; }
+      .plaque-layout { gap: 12px; }
+      .card-summary { padding: 16px; }
+      .plaque-text { font-size: clamp(10px, 2.2vw, 14px); }
+      .removed-name { font-size: 18px; }
+      blockquote { padding-left: 24px; }
+      .numbers { gap: 22px; }
+    }
+    @media (max-width: 600px) {
+      .name-wall { grid-template-columns: 1fr; gap: 24px; }
+      .card-summary { padding: 24px 28px; }
+      .plaque-layout { grid-template-columns: 22% 1fr; gap: 22px; }
+      .plaque-text { font-size: clamp(13px, 4vw, 17px); }
+      .card-toggle { right: 14px; bottom: 11px; font-size: 12px; }
+      .removed-name { font-size: 23px; }
+      .removed-note { font-size: 14px; }
+      .closeups { grid-template-columns: 1fr; }
+      .numbers { grid-template-columns: 1fr; gap: 12px; }
+      .number { padding: 26px 0; }
+    }
+    @media (max-width: 390px) {
+      .hero-top { font-size: 12px; gap: 12px; }
+      .hero-top p { max-width: 180px; }
+      h1 { font-size: 41px; }
+      .hero-subtitle { font-size: 20px; }
+      .hero-caption { font-size: 11px; }
+      .card-summary { padding: 20px; }
+      .plaque-text { font-size: 13px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { transition: none !important; animation: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#content">К содержанию выставки</a>
+
+  <header class="hero">
+    <img class="hero-photo" src="photos/1000018979.jpg" alt="Фасад дома на Долгоруковской улице с аркой, магазином и салоном на первом этаже" width="1600" height="1205" fetchpriority="high">
+    <div class="hero-top">
+      <p>Цифровая мини-выставка · Культурный контекст · НИУ ВШЭ</p>
+      <a href="#names">К стене имён</a>
+    </div>
+    <div class="hero-content">
+      <h1>Последний адрес.<br>Долгоруковская, 5</h1>
+      <p class="hero-subtitle">Как город помнит жильцов «Дома вдов» — и как забывает</p>
+      <p class="hero-intro">Этот дом построили для сотрудников наркоматов иностранных дел и внешней торговли. В 1930-е годы отсюда увезли столько жильцов, что дом прозвали «Домом вдов». Сегодня на его стене — несколько бумажных табличек с именами. Эта выставка — о них и о тех, чьих имён на стене уже нет.</p>
+    </div>
+    <p class="hero-caption">Фасад дома со стороны Долгоруковской: арка во двор, магазин и салон на первом этаже.<span>Фото: М. Носков, ноябрь 2026. Без обработки ИИ.</span></p>
+  </header>
+
+  <main id="content">
+    <section class="section" aria-labelledby="house-title">
+      <div class="section-heading">
+        <h2 id="house-title">Дом</h2>
+        <p class="section-intro">Москва, ул. Долгоруковская, 5, бывшая Каляевская. Кооперативный дом работников НКИД и НКВТ.</p>
+      </div>
+      <ul class="facts">
+        <li>Пайщики платили взносы, в том числе в иностранной валюте.</li>
+        <li>Строили с 1929 по 1937 год (по сайту о доме — до 1939-го); проект несколько раз переделывали, самый известный из архитекторов — И. А. Голосов.</li>
+        <li>В 1937 году дом лишили статуса кооператива.</li>
+        <li>Аресты шли с 1933 по 1951 год, больше всего — в 1937–1938 годах. В квартиры арестованных часто вселялись семьи сотрудников госбезопасности.</li>
+        <li>Сегодня на первом этаже — супермаркет и салон красоты; таблички висят на пилоне рядом с витриной салона.</li>
+      </ul>
+      <div class="photo-pair">
+        <figure>
+          <img src="photos/1000018980.jpg" alt="Другой корпус дома вдоль Долгоруковской улицы" width="1600" height="1205" loading="lazy">
+          <figcaption>Другой корпус дома вдоль улицы.<span>Фото: М. Носков, ноябрь 2026. Без обработки ИИ.</span></figcaption>
+        </figure>
+        <figure>
+          <img src="photos/1000018972.jpg" alt="Пилон рядом с аркой: табличка Гуревичу, следы снятых табличек и вывеска салона маникюра" width="1600" height="1205" loading="lazy">
+          <figcaption>Пилон справа от арки: ряд табличек, табличка Гуревичу, следы снятых табличек, вывеска салона маникюра.<span>Фото: М. Носков, ноябрь 2026. Без обработки ИИ.</span></figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="project-title">
+      <div class="project-layout">
+        <div>
+          <div class="section-heading">
+            <h2 id="project-title">Что такое<br>«Последний адрес»</h2>
+          </div>
+          <div class="prose">
+            <p>Гражданский проект, начатый в 2014 году. Принцип — «одно имя, одна жизнь, один знак»: небольшую стальную табличку ставят на дом, который стал последним адресом человека до ареста. На ней — имя, профессия, даты рождения, ареста, гибели и реабилитации.</p>
+            <p>Табличку заказывает и оплачивает один человек — родственник или просто неравнодушный; нужно согласие жильцов дома. Первые четыре таблички в Москве появились именно на этом доме в декабре 2014 года.</p>
+          </div>
+        </div>
+        <figure class="split-photo">
+          <img src="photos/1000018978.jpg" alt="Бумажная табличка Семену Саркисовичу Саакяну крупным планом" width="1600" height="1205" loading="lazy">
+          <figcaption>Табличка Семену Саркисовичу Саакяну крупным планом.<span>Фото: М. Носков, ноябрь 2026. Без обработки ИИ.</span></figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="section wall-section" id="names" aria-labelledby="names-title">
+      <div class="section-heading">
+        <h2 id="names-title">Стена имён</h2>
+        <p class="section-intro">В 2017 году на доме было 14 табличек, позже — 17. В ноябре 2026 года на фасаде читаются 7, и это бумажные копии. Под ними — контуры клея и отверстия от креплений.</p>
+      </div>
+
+      <div class="wall-group">
+        <h3>Сохранившиеся · табличка на стене сейчас</h3>
+        <div class="name-wall">
+          <article class="person-card present">
+            <button class="card-summary" type="button" aria-expanded="false" aria-controls="person-shindel">
+              <span class="plaque-layout"><span class="plaque-hole" aria-hidden="true"></span><span class="plaque-text"><span>Здесь жил</span><span class="plaque-name">Яков Маркович<br>Шиндель</span><span>Экономист</span><span>Родился в 1890</span><span>Арестован 22.10.1937</span><span>Расстрелян 2.12.1937</span><span>Реабилитирован в 1956</span></span></span>
+              <span class="card-toggle" aria-hidden="true">Справка</span>
+            </button>
+            <div class="card-detail" id="person-shindel" aria-hidden="true"><div class="card-detail-inner"><p>Заместитель начальника Главсахара Наркомата пищевой промышленности.</p></div></div>
+          </article>
+
+          <article class="person-card present">
+            <button class="card-summary" type="button" aria-expanded="false" aria-controls="person-matison">
+              <span class="plaque-layout"><span class="plaque-hole" aria-hidden="true"></span><span class="plaque-text"><span>Здесь жил</span><span class="plaque-name">Абрам Абрамович<br>Матисон</span><span>Дипломат</span><span>Родился в 1893</span><span>Арестован 5.06.1939</span><span>Расстрелян 5.02.1940</span><span>Реабилитирован в 1956</span></span></span>
+              <span class="card-toggle" aria-hidden="true">Справка</span>
+            </button>
+            <div class="card-detail" id="person-matison" aria-hidden="true"><div class="card-detail-inner"><p>Заместитель торгпреда СССР в Персии.</p></div></div>
+          </article>
+
+          <article class="person-card present">
+            <button class="card-summary" type="button" aria-expanded="false" aria-controls="person-eshtern">
+              <span class="plaque-layout"><span class="plaque-hole" aria-hidden="true"></span><span class="plaque-text"><span>Здесь жил</span><span class="plaque-name">Эммануил Григорьевич<br>Штерн</span><span>Журналист</span><span>Родился в 1903</span><span>Арестован 17.03.1938</span><span>Расстрелян 31.05.1938</span><span>Реабилитирован в 1957</span></span></span>
+              <span class="card-toggle" aria-hidden="true">Справка</span>
+            </button>
+            <div class="card-detail" id="person-eshtern" aria-hidden="true"><div class="card-detail-inner"><p>Референт по информации института ВНИТО; жил в одной квартире с братом Давидом.</p></div></div>
+          </article>
+
+          <article class="person-card present">
+            <button class="card-summary" type="button" aria-expanded="false" aria-controls="person-skalov">
+              <span class="plaque-layout"><span class="plaque-hole" aria-hidden="true"></span><span class="plaque-text"><span>Здесь жил</span><span class="plaque-name">Давид Эммануилович<br>Скалов</span><span>Дипломат</span><span>Родился в 1894</span><span>Арестован 5.03.1938</span><span>Расстрелян 31.05.1938</span><span>Реабилитирован в 1956</span></span></span>
+              <span class="card-toggle" aria-hidden="true">Справка</span>
+            </button>
+            <div class="card-detail" id="person-skalov" aria-hidden="true"><div class="card-detail-inner"><p>Старший консультант НКПС.</p></div></div>
+          </article>
+
+          <article class="person-card present">
+            <button class="card-summary" type="button" aria-expanded="false" aria-controls="person-gurevich">
+              <span class="plaque-layout"><span class="plaque-hole" aria-hidden="true"></span><span class="plaque-text"><span>Здесь жил</span><span class="plaque-name">Семен Маркович<br>Гуревич</span><span>Инженер-химик</span><span>Родился в 1875</span><span>Арестован 29.09.1938</span><span>Умер в лагере 22.10.1942</span><span>Реабилитирован в 1957</span></span></span>
+              <span class="card-toggle" aria-hidden="true">Справка</span>
+            </button>
+            <div class="card-detail" id="person-gurevich" aria-hidden="true"><div class="card-detail-inner"><p>Учился в Женеве, старший инженер «Оргнефти». Дата смерти на табличке — 22.10.1942; по мартирологу — 2.10.1942, Ухтижемлаг. В его квартиру в 1939 году въехала семья Белановских; Д. Белановский, автор сайта о доме, искал сведения о Гуревиче почти двадцать лет.</p></div></div>
+          </article>
+
+          <article class="person-card present">
+            <button class="card-summary" type="button" aria-expanded="false" aria-controls="person-saakyan">
+              <span class="plaque-layout"><span class="plaque-hole" aria-hidden="true"></span><span class="plaque-text"><span>Здесь жил</span><span class="plaque-name">Семен Саркисович<br>Саакян</span><span>Экономист</span><span>Родился в 1884</span><span>Арестован 2.09.1937</span><span>Расстрелян 11.12.1937</span><span>Реабилитирован в 1988</span></span></span>
+              <span class="card-toggle" aria-hidden="true">Справка</span>
+            </button>
+            <div class="card-detail" id="person-saakyan" aria-hidden="true"><div class="card-detail-inner"><p>Преподавал экономические дисциплины и статистику. Реабилитирован только в 1988 году.</p></div></div>
+          </article>
+
+          <article class="person-card present">
+            <button class="card-summary" type="button" aria-expanded="false" aria-controls="person-reingold">
+              <span class="plaque-layout"><span class="plaque-hole" aria-hidden="true"></span><span class="plaque-text"><span>Здесь жил</span><span class="plaque-name">Давид Аронович<br>Рейнгольд</span><span>Дипломат</span><span>Родился в 1900</span><span>Арестован 20.06.1938</span><span>Расстрелян 31.07.1939</span><span>Реабилитирован в 1956</span></span></span>
+              <span class="card-toggle" aria-hidden="true">Справка</span>
+            </button>
+            <div class="card-detail" id="person-reingold" aria-hidden="true"><div class="card-detail-inner"><p>Начальник транспортного отдела конторы «Мосподсобстрой».</p></div></div>
+          </article>
+        </div>
+      </div>
+
+      <div class="wall-group">
+        <h3>Снятые · таблички на фасаде сейчас нет</h3>
+        <div class="name-wall">
+          <article class="person-card removed">
+            <button class="card-summary" type="button" aria-expanded="false" aria-controls="person-push"><span class="removed-name">Герман Германович Пуш</span><span class="removed-note">табличка снята</span><span class="card-toggle" aria-hidden="true">Справка</span></button>
+            <div class="card-detail" id="person-push" aria-hidden="true"><div class="card-detail-inner"><p>Руководитель лаборатории ВИСХОМ; расстрелян 16.06.1938.</p></div></div>
+          </article>
+          <article class="person-card removed">
+            <button class="card-summary" type="button" aria-expanded="false" aria-controls="person-khavina"><span class="removed-name">Раиса Леонидовна Хавина-Скрыпник</span><span class="removed-note">табличка снята</span><span class="card-toggle" aria-hidden="true">Справка</span></button>
+            <div class="card-detail" id="person-khavina" aria-hidden="true"><div class="card-detail-inner"><p>Инженер «Анилтреста»; расстреляна 28.08.1938.</p></div></div>
+          </article>
+          <article class="person-card removed">
+            <button class="card-summary" type="button" aria-expanded="false" aria-controls="person-korinets"><span class="removed-name">Иосиф Гаврилович Коринец</span><span class="removed-note">табличка снята</span><span class="card-toggle" aria-hidden="true">Справка</span></button>
+            <div class="card-detail" id="person-korinets" aria-hidden="true"><div class="card-detail-inner"><p>Старший инспектор «Союзснабосоавиахима»; расстрелян 25.01.1938.</p></div></div>
+          </article>
+          <article class="person-card removed">
+            <button class="card-summary" type="button" aria-expanded="false" aria-controls="person-dshtern"><span class="removed-name">Давид Григорьевич Штерн</span><span class="removed-note">табличка снята</span><span class="card-toggle" aria-hidden="true">Справка</span></button>
+            <div class="card-detail" id="person-dshtern" aria-hidden="true"><div class="card-detail-inner"><p>Заведующий 2-м Западным отделом НКИД; умер в Бутырской тюрьме после голодовки 26.06.1937.</p></div></div>
+          </article>
+          <article class="person-card removed">
+            <button class="card-summary" type="button" aria-expanded="false" aria-controls="person-volf"><span class="removed-name">Вильгельм Юльевич Вольф</span><span class="removed-note">табличка снята</span><span class="card-toggle" aria-hidden="true">Справка</span></button>
+            <div class="card-detail" id="person-volf" aria-hidden="true"><div class="card-detail-inner"><p>Консультант Инюрколлегии; расстрелян 21.04.1938.</p></div></div>
+          </article>
+          <article class="person-card removed">
+            <button class="card-summary" type="button" aria-expanded="false" aria-controls="person-mikhailov"><span class="removed-name">Иван Данилович Михайлов</span><span class="removed-note">табличка снята</span><span class="card-toggle" aria-hidden="true">Справка</span></button>
+            <div class="card-detail" id="person-mikhailov" aria-hidden="true"><div class="card-detail-inner"><p>Заведующий консульским отделом НКИД; умер в лагере (Севвостлаг) 13.11.1941.</p></div></div>
+          </article>
+          <article class="person-card removed">
+            <button class="card-summary" type="button" aria-expanded="false" aria-controls="person-fishzon"><span class="removed-name">Авраам Григорьевич Фишзон</span><span class="removed-note">табличка снята</span><span class="card-toggle" aria-hidden="true">Справка</span></button>
+            <div class="card-detail" id="person-fishzon" aria-hidden="true"><div class="card-detail-inner"><p>Начальник отдела Госплана СССР; расстрелян 08.01.1938.</p></div></div>
+          </article>
+          <article class="person-card removed">
+            <button class="card-summary" type="button" aria-expanded="false" aria-controls="person-volya"><span class="removed-name">Владимир Федорович Воля</span><span class="removed-note">табличка снята</span><span class="card-toggle" aria-hidden="true">Справка</span></button>
+            <div class="card-detail" id="person-volya" aria-hidden="true"><div class="card-detail-inner"><p>Заместитель начальника отдела Разведуправления РККА; расстрелян 17.03.1940.</p></div></div>
+          </article>
+        </div>
+        <p class="wall-note">Ещё одна табличка у арки не прочитана. «Снята» означает: её нет среди читаемых табличек на фасаде со стороны Долгоруковской в ноябре 2026 года.</p>
+      </div>
+
+      <div class="wall-group unmarked">
+        <h3>Без таблички · знака на доме нет и не было</h3>
+        <p class="wall-lead">Остальные жильцы из мартиролога дома. Табличек «Последнего адреса» с их именами на фасаде нет, и в известных нам источниках они не упоминаются.</p>
+        <div class="unmarked-wrap" id="unmarked-list">
+          <ol class="unmarked-list">
+            <li><span class="u-name">Никифтидис-Орфанидис Христо Иванович</span><span class="u-meta">кв. 1 · род. 1884 · арестован в 1938</span></li>
+            <li><span class="u-name">Крейчи Фриц Рудольфович</span><span class="u-meta">кв. 9 · род. 1897 · расстрелян 16.06.1938</span></li>
+            <li><span class="u-name">Жукова Мария Федосеевна</span><span class="u-meta">кв. 12 · род. 1897 · судьба в мартирологе не указана</span></li>
+            <li><span class="u-name">Винцер-Вайцнер-Марцеллиш Иосиф-Самуил Генрихович</span><span class="u-meta">кв. 16 · род. 1886 · расстрелян 28.08.1938</span></li>
+            <li><span class="u-name">Даян Георгий Миронович</span><span class="u-meta">кв. 19 · род. 1894 · арестован 28.12.1941, приговорён к высшей мере 25.04.1942</span></li>
+            <li><span class="u-name">Эшба Ефрем Алексеевич</span><span class="u-meta">кв. 19 · род. 1893 · расстрелян 16.04.1939</span></li>
+            <li><span class="u-name">Фишзон Валентина Яновна</span><span class="u-meta">кв. 21 · род. 1913 · осуждена 22.05.1938 на 5 лет ИТЛ</span></li>
+            <li><span class="u-name">Писчиков Константин Андреевич</span><span class="u-meta">кв. 23 · род. 1899 · расстрелян 17.12.1933</span></li>
+            <li><span class="u-name">Миронов-Пинес Борис Миронович</span><span class="u-meta">кв. 25 · род. 1892 · расстрелян 8.10.1937</span></li>
+            <li><span class="u-name">Мнацаканов Азарий Айрапетович</span><span class="u-meta">кв. 25 · род. 1900 · расстрелян 26.08.1938</span></li>
+            <li><span class="u-name">Котельников Иван Михайлович</span><span class="u-meta">кв. 36 · род. 1892 · расстрелян 22.03.1940</span></li>
+            <li><span class="u-name">Винавер Владимир Николаевич</span><span class="u-meta">кв. 37 · род. 1897 · расстрелян 27.07.1941</span></li>
+            <li><span class="u-name">Иодловский Александр Максимилианович</span><span class="u-meta">кв. 40 · род. 1900 · расстрелян 21.08.1937</span></li>
+            <li><span class="u-name">Тамарин Антон Моисеевич</span><span class="u-meta">кв. 47 · род. 1884 · расстрелян 5.02.1940</span></li>
+            <li><span class="u-name">Микадзе А. В.</span><span class="u-meta">кв. 48 · сведений нет</span></li>
+            <li><span class="u-name">Магалиф Яков Мареевич</span><span class="u-meta">кв. 50 · род. 1895 · расстрелян 25.08.1937</span></li>
+            <li><span class="u-name">Мануэльян Михаил Степанович</span><span class="u-meta">кв. 56 · род. 1892 · судьба в мартирологе не указана</span></li>
+            <li><span class="u-name">Спектор Моисей Ильич</span><span class="u-meta">кв. 58 · род. 1891 · расстрелян 16.08.1938</span></li>
+            <li><span class="u-name">Медник Моисей Нахимович</span><span class="u-meta">кв. 58 · род. 1887 · расстрелян 10.01.1938</span></li>
+            <li><span class="u-name">Бессарабов Григорий Иванович</span><span class="u-meta">кв. 60 · род. 1884 · расстрелян 10.12.1937</span></li>
+            <li><span class="u-name">Дмитриев Михаил Дмитриевич</span><span class="u-meta">кв. 67 · род. 1912 · судьба в мартирологе не указана</span></li>
+            <li><span class="u-name">Астахов Георгий Александрович</span><span class="u-meta">кв. 67 · род. 1897 · умер в заключении 14.02.1942</span></li>
+            <li><span class="u-name">Заславский Анатолий Витальевич</span><span class="u-meta">кв. 76 · род. 1895 · расстрелян 27.11.1937</span></li>
+            <li><span class="u-name">Асмус Эрик Адольфович</span><span class="u-meta">кв. 78 · род. 1901 · расстрелян 09.12.1937</span></li>
+            <li><span class="u-name">Давыдов Зиновий Маркович</span><span class="u-meta">кв. 86 · род. 1896 · расстрелян 09.12.1937</span></li>
+            <li><span class="u-name">Бошкович Юлиан Семенович</span><span class="u-meta">кв. 92 · род. 1891 · расстрелян 20.01.1938</span></li>
+            <li><span class="u-name">Эмзин Макс Иванович</span><span class="u-meta">кв. 94 · род. 1897 · расстрелян 28.05.1938</span></li>
+            <li><span class="u-name">Гальперин Яков Петрович</span><span class="u-meta">кв. 100 · род. 1893 · осуждён 20.02.1935 на 5 лет ИТЛ</span></li>
+            <li><span class="u-name">Гандель Аврам Львович</span><span class="u-meta">кв. 100 · род. 1896 · расстрелян 10.12.1937</span></li>
+            <li><span class="u-name">Ленгиель Юлий Осипович</span><span class="u-meta">кв. 101 · род. 1888 · расстрелян 08.01.1938</span></li>
+            <li><span class="u-name">Резников Израиль Абрамович</span><span class="u-meta">кв. 101 · род. 1892 · расстрелян 13.08.1938</span></li>
+            <li><span class="u-name">Шостак Агата Львовна</span><span class="u-meta">кв. 107 · род. 1896 · осуждена 3.09.1937 на 8 лет ИТЛ, освобождена 08.08.1945</span></li>
+            <li><span class="u-name">Шостак Михаил Львович</span><span class="u-meta">кв. 107 · род. 1892 · расстрелян 1.07.1937</span></li>
+            <li><span class="u-name">Мендельсон Абрам Самуилович</span><span class="u-meta">кв. 111 · род. 1892 · отец Натальи Темчиной, см. цитату ниже</span></li>
+            <li><span class="u-name">Белаковский Абрам Исаевич</span><span class="u-meta">кв. 112 · род. 1896 · расстрелян 5.02.1940</span></li>
+            <li><span class="u-name">Бронштейн Борис Александрович</span><span class="u-meta">кв. 117 · род. 1897 · расстрелян 26.10.1937</span></li>
+            <li><span class="u-name">Тарский Владимир Леонидович</span><span class="u-meta">кв. 129 · род. 1925 · судьба в мартирологе не указана</span></li>
+            <li><span class="u-name">Кемпнер Виктор Фалькович</span><span class="u-meta">кв. 132 · род. 1889 · расстрелян 10.02.1938</span></li>
+            <li><span class="u-name">Геллер Владимир Александрович</span><span class="u-meta">кв. 137 · род. 1904 · арестован 15.04.1937, дело прекращено 28.04.1939</span></li>
+            <li><span class="u-name">Похвалинский Борис Александрович</span><span class="u-meta">кв. 143 · род. 1893 · расстрелян 15.03.1938</span></li>
+            <li><span class="u-name">Нуллер Лев Моисеевич</span><span class="u-meta">кв. 153 · род. 1897 · расстрелян 28.07.1941</span></li>
+            <li><span class="u-name">Жуховицкий Эммануил Львович</span><span class="u-meta">кв. 164 · род. 1881 · расстрелян 25.12.1937</span></li>
+            <li><span class="u-name">Белицкий Ефим Яковлевич</span><span class="u-meta">кв. 165 · род. 1895 · расстрелян 5.02.1940</span></li>
+            <li><span class="u-name">Штерн (Хаймович) Софья Яковлевна</span><span class="u-meta">кв. 172 · род. 1901 · арестована 17.07.1937, осуждена 14.02.1938</span></li>
+            <li><span class="u-name">Степанов Павел Николаевич</span><span class="u-meta">кв. 174 · род. 1907 · судьба в мартирологе не указана</span></li>
+            <li><span class="u-name">Элисман Лев Георгиевич</span><span class="u-meta">кв. 179 · род. 1893 · расстрелян 17.03.1940</span></li>
+            <li><span class="u-name">Ландсберг Владимир Ефимович</span><span class="u-meta">кв. 187 · род. 1878 · расстрелян 28.05.1938</span></li>
+            <li><span class="u-name">Абрамсон Лазарь Меерович</span><span class="u-meta">кв. 200 · род. 1884 · арестован 13.12.1950, 8 лет ИТЛ, освобождён в 1954</span></li>
+            <li><span class="u-name">Фурман Клара Яковлевна</span><span class="u-meta">кв. 205 · род. 1902 · арестована 23.06.1941, 10 лет ИТЛ</span></li>
+            <li><span class="u-name">Турбин Георгий Васильевич</span><span class="u-meta">кв. 216 · род. 1894 · расстрелян 01.09.1938</span></li>
+            <li><span class="u-name">Ульрих Николай Николаевич</span><span class="u-meta">кв. 223 · род. 1902 · дважды осуждён на 10 лет ИТЛ — в 1938 и 1949</span></li>
+            <li><span class="u-name">Вайсбейн Борис Семенович</span><span class="u-meta">кв. 226 · род. 1877 · расстрелян 01.10.1937</span></li>
+            <li><span class="u-name">Левин Михаил Ильич</span><span class="u-meta">кв. 232 · род. 1904 · расстрелян 20.01.1938</span></li>
+            <li><span class="u-name">Стефанов Николай Васильевич</span><span class="u-meta">кв. 235 · род. 1902 · расстрелян 10.02.1938</span></li>
+            <li><span class="u-name">Мнацаканова Эрна Феликсовна</span><span class="u-meta">кв. 250 · род. 1902 · расстреляна 27.09.1938</span></li>
+            <li><span class="u-name">Бонтус Антон Антонович</span><span class="u-meta">кв. 250 · род. 1893 · судьба в мартирологе не указана</span></li>
+            <li><span class="u-name">Туманов-Розенблюм Иосиф Рафаилович</span><span class="u-meta">кв. 251 · род. 1896 · расстрелян 28.08.1938</span></li>
+            <li><span class="u-name">Пикман Яков Абрамович</span><span class="u-meta">кв. 256 · род. 1894 · расстрелян 28.07.1941</span></li>
+            <li><span class="u-name">Рабинович Филипп Яковлевич</span><span class="u-meta">кв. 261 · род. 1885 · расстрелян 09.12.1937</span></li>
+            <li><span class="u-name">Килевиц Фриц Фрицевич</span><span class="u-meta">кв. 267 · род. 1885 · расстрелян 26.11.1937</span></li>
+            <li><span class="u-name">Казакевич Александр Исаакович</span><span class="u-meta">кв. 271 · род. 1895 · расстрелян 28.08.1938</span></li>
+            <li><span class="u-name">Бабаян А. В.</span><span class="u-meta">кв. 273 · сведений нет</span></li>
+            <li><span class="u-name">Мосина Нина Васильевна</span><span class="u-meta">кв. 274 · род. 1900 · расстреляна 26.01.1940</span></li>
+            <li><span class="u-name">Рабинков Иосиф Семенович</span><span class="u-meta">кв. 275 · род. 1902 · расстрелян 5.02.1940</span></li>
+            <li><span class="u-name">Вальтер Петр Петрович</span><span class="u-meta">кв. 282 · род. 1888 · расстрелян 28.02.1938</span></li>
+            <li><span class="u-name">Окулович (Окулевич) Георгий Степанович</span><span class="u-meta">кв. 285 · род. 1889 · расстрелян 08.04.1938</span></li>
+            <li><span class="u-name">Абрамов Сергей Иванович</span><span class="u-meta">кв. 286 · род. 1900 · осуждён на 25 лет ИТЛ, умер в ссылке 16.01.1955</span></li>
+            <li><span class="u-name">Цукерман Владимир Моисеевич</span><span class="u-meta">кв. 287 · род. 1891 · расстрелян 22.08.1937</span></li>
+            <li><span class="u-name">Охтин-Юров Андрей Яковлевич</span><span class="u-meta">кв. 289 · род. 1891 · расстрелян 20.01.1938</span></li>
+            <li><span class="u-name">Амброжис Болеслав Викентьевич</span><span class="u-meta">кв. 291 · род. 1892 · расстрелян 01.09.1938</span></li>
+            <li><span class="u-name">Янсон Ян Эрнестович</span><span class="u-meta">кв. 294 · род. 1885 · расстрелян 08.01.1938</span></li>
+            <li><span class="u-name">Забелышинский Хаим Моисеевич</span><span class="u-meta">кв. 304 · род. 1897 · расстрелян 27.07.1941</span></li>
+            <li><span class="u-name">Шпиндлер Евсей Максимович</span><span class="u-meta">кв. 305 · род. 1884 · расстрелян 22.08.1938</span></li>
+            <li><span class="u-name">Кубаткин Петр Николаевич</span><span class="u-meta">кв. 306 · род. 1907 · расстрелян 27.10.1950</span></li>
+            <li><span class="u-name">Бокк И. А.</span><span class="u-meta">кв. 308 · сведений нет</span></li>
+            <li><span class="u-name">Смирнов В. Е.</span><span class="u-meta">кв. 310 · сведений нет</span></li>
+            <li><span class="u-name">Рожков И. И.</span><span class="u-meta">кв. 311 · сведений нет</span></li>
+            <li><span class="u-name">Сквирский Борис Евсеевич</span><span class="u-meta">кв. 319 · род. 1887 · расстрелян 30.07.1941</span></li>
+            <li><span class="u-name">Синкин Николай Андреевич</span><span class="u-meta">кв. 328 · род. 1896 · расстрелян 28.08.1938</span></li>
+          </ol>
+        </div>
+        <button class="unmarked-more" type="button" aria-expanded="true" aria-controls="unmarked-list" hidden>Показать все 79 имён</button>
+        <p class="wall-note">Порядок — по номерам квартир, как в мартирологе. По некоторым данным, табличек на доме было 17, а поимённо известны 15, поэтому у одного-двух человек из этого списка табличка, возможно, всё же была.</p>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="copies-title">
+      <div class="copies-layout">
+        <div>
+          <div class="section-heading"><h2 id="copies-title">Копии</h2></div>
+          <div class="prose">
+            <p>Когда стальные таблички сорвали, жильцы сами сделали картонные копии, потом стали печатать их на принтере. Копии срывали через несколько часов, и жильцы даже дежурили, чтобы узнать, кто это делает. Новые стальные таблички жильцы изготовили, но пока не вешают.</p>
+            <p>По Москве таблички «Последнего адреса» исчезают с фасадов с 2023 года, на их месте появляются бумажные копии, которые тоже срывают.</p>
+          </div>
+        </div>
+        <figure class="split-photo">
+          <img src="photos/1000018972.jpg" alt="Бумажные таблички и пустые контуры на пилоне рядом с салоном" width="1600" height="1205" loading="lazy">
+          <figcaption>Бумажные таблички, контуры клея и отверстия от креплений на пилоне рядом с витриной салона.<span>Фото: М. Носков, ноябрь 2026. Без обработки ИИ.</span></figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="section quote-section" aria-label="Цитата Натальи Темчиной">
+      <blockquote>
+        <p>Перед тем, как его увели, отец подошел к моей кроватке, поцеловал меня и сказал: «Я скоро приду». Это «скоро» продлилось восемнадцать лет.</p>
+        <footer>— Наталья Темчина об аресте отца, инженера А. С. Мендельсона, 1938 год</footer>
+      </blockquote>
+    </section>
+
+    <section class="section" aria-labelledby="numbers-title">
+      <h2 id="numbers-title" style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;">7 и 93</h2>
+      <div class="numbers">
+        <div class="number"><strong>7</strong><span>табличек на стене</span></div>
+        <div class="number"><strong>93</strong><span>имени в мартирологе дома</span></div>
+      </div>
+      <div class="numbers-prose">
+        <p>Память о жильцах этого дома держится исключительно на частной инициативе: родственников, новых жильцов дома или просто неравнодушных людей. Без них репрессированные были бы забыты.</p>
+        <a class="martirolog-link" href="https://kaliayevskaya5.ru/martirolog/" target="_blank" rel="noopener noreferrer">Мартиролог дома ↗</a>
+      </div>
+    </section>
+
+    <section class="section sources-section" aria-label="Источники и как сделана выставка">
+      <p class="about-line">Сведения — по сайту проекта «Последний адрес», Википедии, материалам Д. Белановского (<a href="https://kaliayevskaya5.ru/" target="_blank" rel="noopener noreferrer">kaliayevskaya5.ru</a>) и «Москвич Mag»; подробный список — в исследовании.</p>
+      <p class="about-line">Фотографии — М. Носков, ноябрь 2026, без обработки ИИ. Тексты сверены с источниками; ИИ (Claude) использовался для редактуры и вёрстки.</p>
+    </section>
+  </main>
+
+  <footer class="page-footer">Последний адрес. Долгоруковская, 5 · Автор: Максим Носков, НИУ ВШЭ, группа БЭАД 264, 2026</footer>
+
+  <script>
+    document.querySelectorAll('.card-summary').forEach((button) => {
+      button.addEventListener('click', () => {
+        const card = button.closest('.person-card');
+        const detail = document.getElementById(button.getAttribute('aria-controls'));
+        const isOpen = card.classList.toggle('open');
+        button.setAttribute('aria-expanded', String(isOpen));
+        detail.setAttribute('aria-hidden', String(!isOpen));
+      });
+    });
+
+    const unmarked = document.getElementById('unmarked-list');
+    const moreBtn = document.querySelector('.unmarked-more');
+    if (unmarked && moreBtn) {
+      unmarked.classList.add('is-collapsed');
+      moreBtn.hidden = false;
+      moreBtn.setAttribute('aria-expanded', 'false');
+      moreBtn.addEventListener('click', () => {
+        const collapsed = unmarked.classList.toggle('is-collapsed');
+        moreBtn.setAttribute('aria-expanded', String(!collapsed));
+        moreBtn.textContent = collapsed ? 'Показать все 79 имён' : 'Свернуть список';
+        if (collapsed) unmarked.scrollIntoView({ block: 'start' });
+      });
+    }
+  </script>
+</body>
+</html>
